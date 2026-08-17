@@ -1,4 +1,5 @@
 import { crearProducto } from '../actions'
+import BotonGuardar from '@/components/BotonGuardar'
 
 export default function NuevoProductoPage() {
   return (
@@ -32,12 +33,9 @@ export default function NuevoProductoPage() {
           defaultValue="100"
         />
 
-        <button
-          type="submit"
-          className="mt-2 rounded-lg bg-rose-800 px-4 py-3 text-base font-semibold text-white"
-        >
-          Guardar y agregar receta
-        </button>
+        <div className="mt-2">
+          <BotonGuardar label="Guardar y agregar receta" labelPendiente="Guardando..." />
+        </div>
       </form>
     </div>
   )

@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { supabaseConfigurado } from '@/lib/supabase/config'
 import ConfiguracionPendiente from '@/components/ConfiguracionPendiente'
-import { producir } from './actions'
+import ProducirForm from './ProducirForm'
 
 export default async function ProducirPage({
   searchParams,
@@ -38,42 +38,7 @@ export default async function ProducirPage({
         <p className="text-zinc-500">Primero creá un producto con su receta.</p>
       )}
 
-      {configurado && productos.length > 0 && (
-        <form action={producir} className="flex flex-col gap-4 rounded-xl border border-zinc-200 bg-white p-4">
-          <label className="flex flex-col gap-1.5">
-            <span className="text-sm font-medium text-zinc-700">Producto</span>
-            <select
-              name="producto_id"
-              required
-              className="rounded-lg border border-zinc-300 px-4 py-3 text-base focus:border-rose-500 focus:outline-none"
-            >
-              <option value="">Elegí un producto</option>
-              {productos.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.nombre}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label className="flex flex-col gap-1.5">
-            <span className="text-sm font-medium text-zinc-700">Cantidad producida</span>
-            <input
-              name="cantidad"
-              type="number"
-              min="1"
-              step="1"
-              required
-              defaultValue={1}
-              className="rounded-lg border border-zinc-300 px-4 py-3 text-base focus:border-rose-500 focus:outline-none"
-            />
-          </label>
-
-          <button type="submit" className="rounded-lg bg-rose-800 px-4 py-3 text-base font-semibold text-white">
-            Confirmar producción
-          </button>
-        </form>
-      )}
+      {configurado && productos.length > 0 && <ProducirForm productos={productos} />}
     </div>
   )
 }

@@ -1,8 +1,9 @@
 import Link from 'next/link'
-import { AlertTriangle, Package, Tags, Hammer, Truck } from 'lucide-react'
+import { Package, Tags, Hammer, Truck } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { supabaseConfigurado } from '@/lib/supabase/config'
 import ConfiguracionPendiente from '@/components/ConfiguracionPendiente'
+import InsumosBajosCard from '@/components/InsumosBajosCard'
 import type { Insumo } from '@/types/database'
 
 const ACCESOS = [
@@ -31,25 +32,7 @@ export default async function Dashboard() {
 
       {!configurado && <ConfiguracionPendiente />}
 
-      {configurado && insumosBajos.length > 0 && (
-        <div className="flex flex-col gap-2 rounded-xl border border-red-200 bg-red-50 p-4">
-          <div className="flex items-center gap-2 text-red-800">
-            <AlertTriangle size={20} />
-            <p className="font-semibold">Insumos bajos o agotados</p>
-          </div>
-          <ul className="flex flex-col gap-1 text-sm text-red-700">
-            {insumosBajos.map((i) => (
-              <li key={i.id}>
-                {i.nombre} — quedan {i.stock_actual} {i.unidad_uso}
-                {i.stock_actual <= 0 ? ' (agotado)' : ''}
-              </li>
-            ))}
-          </ul>
-          <Link href="/insumos" className="text-sm font-semibold text-red-800 underline">
-            Ver insumos
-          </Link>
-        </div>
-      )}
+      {configurado && insumosBajos.length > 0 && <InsumosBajosCard insumos={insumosBajos} />}
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {ACCESOS.map((a) => {

@@ -103,6 +103,44 @@ export async function agregarInsumoReceta(productoId: string, formData: FormData
   revalidatePath('/productos')
 }
 
+export async function actualizarCantidadReceta(recetaId: string, productoId: string, formData: FormData) {
+  const supabase = await createClient()
+
+  const cantidad = num(formData, 'cantidad_usada')
+  if (cantidad <= 0) return
+
+  const { error } = await supabase.from('recetas').update({ cantidad_usada: cantidad }).eq('id', recetaId)
+  if (error) throw new Error(error.message)
+
+  await recalcularPrecio(productoId)
+  revalidatePath(`/productos/${productoId}`)
+  revalidatePath('/productos')
+}
+
+export async function eliminarProducto(productoId: string) {
+  const supabase = await createClient()
+
+  const { error } = await supabase.from('productos_terminados').delete().eq('id', productoId)
+
+  if (error) {
+    if (error.code === '23503') {
+      // Tiene producciones históricas asociadas: no se puede borrar sin perder ese historial,
+      // así que lo ocultamos (activo=false) en vez de romper la integridad de los datos.
+      const { error: errOcultar } = await supabase
+        .from('productos_terminados')
+        .update({ activo: false })
+        .eq('id', productoId)
+      if (errOcultar) throw new Error(errOcultar.message)
+    } else {
+      throw new Error(error.message)
+    }
+  }
+
+  revalidatePath('/productos')
+  revalidatePath('/producir')
+  redirect('/productos')
+}
+
 export async function quitarInsumoReceta(recetaId: string, productoId: string) {
   const supabase = await createClient()
 

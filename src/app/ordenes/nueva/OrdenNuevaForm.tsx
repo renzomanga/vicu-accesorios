@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import { unstable_rethrow } from 'next/navigation'
 import { extraerCapturasAction } from '../gemini-action'
 import { confirmarOrden, type ItemConfirmado } from '../actions'
 import type { OrdenExtraida } from '@/lib/gemini'
@@ -131,6 +132,7 @@ export default function OrdenNuevaForm({ insumosExistentes }: { insumosExistente
           items: itemsConfirmados,
         })
       } catch (e) {
+        unstable_rethrow(e)
         setError(e instanceof Error ? e.message : 'No se pudo guardar la orden')
       }
     })

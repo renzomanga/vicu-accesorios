@@ -15,6 +15,7 @@ export default async function ProductosPage() {
     const { data } = await supabase
       .from('productos_terminados')
       .select('*')
+      .eq('activo', true)
       .order('nombre')
     productos = data ?? []
   }

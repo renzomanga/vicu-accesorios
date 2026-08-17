@@ -5,7 +5,7 @@ App mobile-first (PWA) para gestionar insumos, recetas, stock y precios de venta
 ## Stack
 
 - Next.js (App Router) + Tailwind CSS, como PWA instalable
-- Supabase (Postgres + Auth por magic link + Storage)
+- Supabase (Postgres + Auth por email/contraseña + Storage)
 - Gemini API (visión) para extraer datos estructurados de capturas de órdenes de compra
 
 ## Setup local
@@ -14,6 +14,7 @@ App mobile-first (PWA) para gestionar insumos, recetas, stock y precios de venta
    - Creá un proyecto gratis en [supabase.com](https://supabase.com) y copiá `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` y `SUPABASE_SERVICE_ROLE_KEY` (Project Settings → API).
    - Corré el contenido de `supabase/schema.sql` en el SQL Editor de tu proyecto Supabase para crear las tablas.
    - Conseguí una API key de Gemini en [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) y ponela en `GEMINI_API_KEY`.
+   - Los usuarios se crean a mano en Supabase (Authentication → Users → Add user, con email y contraseña, marcando "Auto Confirm User"). No hay alta de cuentas desde la app.
 2. Instalá dependencias y corré el servidor:
 
 ```bash

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
-import { formatARS, formatNumero } from '@/lib/format'
+import { formatARS, formatCantidadUnidad } from '@/lib/format'
 import { actualizarInsumo, ajustarStock } from '../actions'
 
 export default async function InsumoDetallePage({
@@ -29,7 +29,7 @@ export default async function InsumoDetallePage({
       <div>
         <h1 className="text-2xl font-bold text-zinc-900">{insumo.nombre}</h1>
         <p className="text-sm text-zinc-500">
-          Stock actual: {formatNumero(insumo.stock_actual)} {insumo.unidad_uso} · Costo:{' '}
+          Stock actual: {formatCantidadUnidad(insumo.stock_actual, insumo.unidad_uso)} · Costo:{' '}
           {formatARS(insumo.costo_unitario_ponderado)}/{insumo.unidad_uso}
         </p>
       </div>
@@ -102,7 +102,7 @@ export default async function InsumoDetallePage({
                 </span>
                 <span className={m.cantidad < 0 ? 'text-red-600' : 'text-emerald-600'}>
                   {m.cantidad > 0 ? '+' : ''}
-                  {formatNumero(m.cantidad)} {insumo.unidad_uso}
+                  {formatCantidadUnidad(m.cantidad, insumo.unidad_uso)}
                 </span>
               </li>
             ))}

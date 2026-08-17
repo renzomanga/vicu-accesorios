@@ -1,27 +1,25 @@
 'use server'
 
+import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 
-export async function enviarMagicLink(
-  _prevState: { ok: boolean; error: string | null },
+export async function iniciarSesion(
+  _prevState: { error: string | null },
   formData: FormData
 ) {
   const email = String(formData.get('email') || '').trim()
-  if (!email) {
-    return { ok: false, error: 'Ingresá un email' }
+  const password = String(formData.get('password') || '')
+
+  if (!email || !password) {
+    return { error: 'Completá el email y la contraseña' }
   }
 
   const supabase = await createClient()
-  const origin = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-
-  const { error } = await supabase.auth.signInWithOtp({
-    email,
-    options: { emailRedirectTo: `${origin}/auth/confirm` },
-  })
+  const { error } = await supabase.auth.signInWithPassword({ email, password })
 
   if (error) {
-    return { ok: false, error: error.message }
+    return { error: 'Email o contraseña incorrectos' }
   }
 
-  return { ok: true, error: null }
+  redirect('/')
 }

@@ -1,7 +1,11 @@
 import { notFound } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
-import { formatARS, formatNumero } from '@/lib/format'
-import { actualizarCostosProducto, agregarInsumoReceta, quitarInsumoReceta } from '../actions'
+import { formatARS } from '@/lib/format'
+import { actualizarCostosProducto, agregarInsumoReceta, eliminarProducto } from '../actions'
+import AgregarInsumoForm from './AgregarInsumoForm'
+import CostosForm from './CostosForm'
+import RecetaList from './RecetaList'
+import EliminarProductoBoton from './EliminarProductoBoton'
 
 export default async function ProductoDetallePage({
   params,
@@ -58,118 +62,29 @@ export default async function ProductoDetallePage({
         {receta.length === 0 ? (
           <p className="mb-3 text-sm text-zinc-500">Todavía no agregaste insumos.</p>
         ) : (
-          <ul className="mb-4 flex flex-col gap-2">
-            {receta.map((r) => (
-              <li key={r.id} className="flex items-center justify-between text-sm">
-                <span>
-                  {r.insumos?.nombre} — {formatNumero(r.cantidad_usada)} {r.insumos?.unidad_uso}
-                </span>
-                <div className="flex items-center gap-3">
-                  <span className="text-zinc-500">
-                    {formatARS(r.cantidad_usada * (r.insumos?.costo_unitario_ponderado ?? 0))}
-                  </span>
-                  <form action={quitarInsumoReceta.bind(null, r.id, id)}>
-                    <button type="submit" className="text-red-600 underline">
-                      Quitar
-                    </button>
-                  </form>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <RecetaList receta={receta} productoId={id} />
         )}
 
-        <form action={agregarConId} className="flex items-end gap-3">
-          <label className="flex flex-1 flex-col gap-1.5">
-            <span className="text-sm font-medium text-zinc-700">Insumo</span>
-            <select
-              name="insumo_id"
-              required
-              className="rounded-lg border border-zinc-300 px-3 py-2.5 text-base focus:border-rose-500 focus:outline-none"
-            >
-              <option value="">Elegí un insumo</option>
-              {(insumos ?? []).map((i) => (
-                <option key={i.id} value={i.id}>
-                  {i.nombre}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="flex w-28 flex-col gap-1.5">
-            <span className="text-sm font-medium text-zinc-700">Cantidad</span>
-            <input
-              name="cantidad_usada"
-              type="number"
-              step="any"
-              required
-              className="rounded-lg border border-zinc-300 px-3 py-2.5 text-base focus:border-rose-500 focus:outline-none"
-            />
-          </label>
-          <button type="submit" className="rounded-lg bg-zinc-800 px-4 py-2.5 text-sm font-semibold text-white">
-            Agregar
-          </button>
-        </form>
+        <AgregarInsumoForm insumos={insumos ?? []} action={agregarConId} />
       </section>
 
       <section className="rounded-xl border border-zinc-200 bg-white p-4">
         <h2 className="mb-3 font-semibold text-zinc-800">Costos y precio</h2>
-        <form action={actualizarConId} className="flex flex-col gap-4">
-          <Campo label="Nombre" name="nombre" defaultValue={producto.nombre} required />
-          <div className="grid grid-cols-2 gap-3">
-            <Campo
-              label="Mano de obra ($)"
-              name="mano_obra_costo"
-              type="number"
-              step="any"
-              defaultValue={producto.mano_obra_costo}
-            />
-            <Campo
-              label="Otros costos ($)"
-              name="otros_costos"
-              type="number"
-              step="any"
-              defaultValue={producto.otros_costos}
-            />
-          </div>
-          <Campo
-            label="Margen de ganancia (%)"
-            name="margen_pct"
-            type="number"
-            step="any"
-            defaultValue={producto.margen_pct}
-          />
-          <Campo
-            label="Precio final (opcional, redondeado a mano)"
-            name="precio_final"
-            type="number"
-            step="any"
-            defaultValue={producto.precio_final ?? ''}
-            hint="Si lo dejás vacío se usa el precio sugerido"
-          />
-          <button type="submit" className="rounded-lg bg-rose-800 px-4 py-3 text-base font-semibold text-white">
-            Guardar
-          </button>
-        </form>
+        <CostosForm
+          productoId={id}
+          costoMateriales={costoMateriales}
+          nombre={producto.nombre}
+          manoObraInicial={producto.mano_obra_costo}
+          otrosCostosInicial={producto.otros_costos}
+          margenInicial={producto.margen_pct}
+          precioFinalInicial={producto.precio_final}
+          action={actualizarConId}
+        />
       </section>
-    </div>
-  )
-}
 
-function Campo({
-  label,
-  name,
-  hint,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & { label: string; hint?: string }) {
-  return (
-    <label className="flex flex-col gap-1.5">
-      <span className="text-sm font-medium text-zinc-700">{label}</span>
-      <input
-        name={name}
-        className="rounded-lg border border-zinc-300 px-4 py-3 text-base focus:border-rose-500 focus:outline-none"
-        {...props}
-      />
-      {hint && <span className="text-xs text-zinc-500">{hint}</span>}
-    </label>
+      <div className="flex justify-center">
+        <EliminarProductoBoton nombre={producto.nombre} action={eliminarProducto.bind(null, id)} />
+      </div>
+    </div>
   )
 }
