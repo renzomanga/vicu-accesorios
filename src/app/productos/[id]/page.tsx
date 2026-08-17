@@ -47,20 +47,20 @@ export default async function ProductoDetallePage({
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-zinc-900">{producto.nombre}</h1>
-        <p className="text-2xl font-bold text-rose-800">
+        <h1 className="font-caslon text-2xl text-cantera-ink">{producto.nombre}</h1>
+        <p className="text-2xl font-bold text-cantera-primary">
           {formatARS(producto.precio_final ?? producto.precio_sugerido)}
         </p>
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-cantera-secondary">
           Sugerido: {formatARS(producto.precio_sugerido)} · Costo materiales: {formatARS(costoMateriales)}
         </p>
       </div>
 
-      <section className="rounded-xl border border-zinc-200 bg-white p-4">
-        <h2 className="mb-3 font-semibold text-zinc-800">Receta</h2>
+      <section className="rounded-xl border border-cantera-sand bg-white p-4">
+        <h2 className="mb-3 font-semibold text-cantera-ink">Receta</h2>
 
         {receta.length === 0 ? (
-          <p className="mb-3 text-sm text-zinc-500">Todavía no agregaste insumos.</p>
+          <p className="mb-3 text-sm text-cantera-secondary">Todavía no agregaste insumos.</p>
         ) : (
           <RecetaList receta={receta} productoId={id} />
         )}
@@ -68,8 +68,8 @@ export default async function ProductoDetallePage({
         <AgregarInsumoForm insumos={insumos ?? []} action={agregarConId} />
       </section>
 
-      <section className="rounded-xl border border-zinc-200 bg-white p-4">
-        <h2 className="mb-3 font-semibold text-zinc-800">Costos y precio</h2>
+      <section className="rounded-xl border border-cantera-sand bg-white p-4">
+        <h2 className="mb-3 font-semibold text-cantera-ink">Costos y precio</h2>
         <CostosForm
           productoId={id}
           costoMateriales={costoMateriales}

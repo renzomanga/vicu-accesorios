@@ -1,8 +1,21 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { NAV_ITEMS } from './nav-items'
+
+function Marca({ compact = false }: { compact?: boolean }) {
+  return (
+    <div className="flex items-center gap-3">
+      <Image src="/isotipo.svg" alt="" width={36} height={36} className="h-9 w-9 shrink-0" />
+      <div>
+        <p className="font-caslon text-lg leading-none text-cantera-ink">Cantera Joyas</p>
+        {!compact && <p className="caption mt-1 text-cantera-secondary">Costos y precios</p>}
+      </div>
+    </div>
+  )
+}
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -14,10 +27,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen w-full">
       {/* Sidebar desktop */}
-      <aside className="hidden md:flex md:w-60 md:flex-col md:border-r md:border-zinc-200 md:bg-white md:px-4 md:py-6">
+      <aside className="hidden md:flex md:w-60 md:flex-col md:border-r md:border-cantera-sand md:bg-white md:px-4 md:py-6">
         <div className="mb-8 px-2">
-          <p className="text-lg font-bold text-rose-800">Vicu Accesorios</p>
-          <p className="text-sm text-zinc-500">Costos y precios</p>
+          <Marca />
         </div>
         <nav className="flex flex-col gap-1">
           {NAV_ITEMS.map((item) => {
@@ -28,7 +40,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 key={item.href}
                 href={item.href}
                 className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
-                  active ? 'bg-rose-100 text-rose-900' : 'text-zinc-600 hover:bg-zinc-100'
+                  active
+                    ? 'bg-cantera-primary/10 text-cantera-primary'
+                    : 'text-cantera-secondary hover:bg-cantera-sand/30'
                 }`}
               >
                 <Icon size={20} />
@@ -41,14 +55,14 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       <div className="flex flex-1 flex-col">
         {/* Header mobile */}
-        <header className="border-b border-zinc-200 bg-white px-4 py-3 md:hidden">
-          <p className="text-lg font-bold text-rose-800">Vicu Accesorios</p>
+        <header className="border-b border-cantera-sand bg-white px-4 py-3 md:hidden">
+          <Marca compact />
         </header>
 
         <main className="flex-1 px-4 py-5 pb-24 md:px-8 md:py-8 md:pb-8">{children}</main>
 
         {/* Bottom nav mobile */}
-        <nav className="fixed inset-x-0 bottom-0 z-10 flex border-t border-zinc-200 bg-white pb-[env(safe-area-inset-bottom)] md:hidden">
+        <nav className="fixed inset-x-0 bottom-0 z-10 flex border-t border-cantera-sand bg-white pb-[env(safe-area-inset-bottom)] md:hidden">
           {NAV_ITEMS.map((item) => {
             const active = pathname === item.href
             const Icon = item.icon
@@ -57,7 +71,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 key={item.href}
                 href={item.href}
                 className={`flex flex-1 flex-col items-center gap-0.5 py-2.5 text-xs font-medium ${
-                  active ? 'text-rose-800' : 'text-zinc-500'
+                  active ? 'text-cantera-primary' : 'text-cantera-secondary/70'
                 }`}
               >
                 <Icon size={22} />

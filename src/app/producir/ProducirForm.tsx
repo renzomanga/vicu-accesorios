@@ -58,22 +58,22 @@ export default function ProducirForm({ productos }: { productos: Producto[] }) {
   return (
     <div className="flex flex-col gap-4">
       {carrito.length > 0 && (
-        <div className="flex flex-col gap-2 rounded-xl border border-zinc-200 bg-white p-4">
+        <div className="flex flex-col gap-2 rounded-xl border border-cantera-sand bg-white p-4">
           {carrito.map((c) => (
             <div key={c.productoId} className="flex items-center gap-3">
-              <span className="flex-1 text-sm font-medium text-zinc-800">{c.nombre}</span>
+              <span className="flex-1 text-sm font-medium text-cantera-ink">{c.nombre}</span>
               <input
                 type="number"
                 min="1"
                 step="1"
                 value={c.cantidad}
                 onChange={(e) => cambiarCantidad(c.productoId, Number(e.target.value) || 1)}
-                className="w-20 rounded-lg border border-zinc-300 px-2 py-1.5 text-sm focus:border-rose-500 focus:outline-none"
+                className="w-20 rounded-lg border border-cantera-sand px-2 py-1.5 text-sm focus:border-cantera-primary focus:outline-none"
               />
               <button
                 type="button"
                 onClick={() => quitarDelCarrito(c.productoId)}
-                className="text-zinc-400 hover:text-red-600"
+                className="text-cantera-neutral hover:text-red-600"
               >
                 <X size={18} />
               </button>
@@ -82,29 +82,29 @@ export default function ProducirForm({ productos }: { productos: Producto[] }) {
         </div>
       )}
 
-      <div className="flex flex-col gap-3 rounded-xl border border-zinc-200 bg-white p-4">
+      <div className="flex flex-col gap-3 rounded-xl border border-cantera-sand bg-white p-4">
         {!seleccionado ? (
           <>
             <label className="relative flex items-center">
-              <Search size={18} className="pointer-events-none absolute left-3 text-zinc-400" />
+              <Search size={18} className="pointer-events-none absolute left-3 text-cantera-neutral" />
               <input
                 type="search"
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
                 placeholder="Buscar producto para agregar..."
-                className="w-full rounded-lg border border-zinc-300 py-3 pl-10 pr-4 text-base focus:border-rose-500 focus:outline-none"
+                className="w-full rounded-lg border border-cantera-sand py-3 pl-10 pr-4 text-base focus:border-cantera-primary focus:outline-none"
               />
             </label>
 
             {busqueda.trim() !== '' && (
               <div className="flex max-h-64 flex-col gap-1 overflow-y-auto">
-                {filtrados.length === 0 && <p className="p-2 text-sm text-zinc-500">No encontramos productos.</p>}
+                {filtrados.length === 0 && <p className="p-2 text-sm text-cantera-secondary">No encontramos productos.</p>}
                 {filtrados.map((p) => (
                   <button
                     key={p.id}
                     type="button"
                     onClick={() => setSeleccionado(p)}
-                    className="rounded-lg px-3 py-3 text-left text-base hover:bg-rose-50"
+                    className="rounded-lg px-3 py-3 text-left text-base hover:bg-cantera-primary/5"
                   >
                     {p.nombre}
                   </button>
@@ -121,18 +121,18 @@ export default function ProducirForm({ productos }: { productos: Producto[] }) {
             }}
             className="flex items-end gap-3"
           >
-            <div className="flex flex-1 items-center justify-between gap-2 rounded-lg bg-rose-50 px-3 py-2.5">
-              <span className="text-sm font-semibold text-rose-900">{seleccionado.nombre}</span>
+            <div className="flex flex-1 items-center justify-between gap-2 rounded-lg bg-cantera-primary/10 px-3 py-2.5">
+              <span className="text-sm font-semibold text-cantera-primary">{seleccionado.nombre}</span>
               <button
                 type="button"
                 onClick={() => setSeleccionado(null)}
-                className="flex shrink-0 items-center gap-1 text-xs text-rose-800 underline"
+                className="flex shrink-0 items-center gap-1 text-xs text-cantera-primary underline"
               >
                 <X size={14} /> Cambiar
               </button>
             </div>
             <label className="flex w-24 flex-col gap-1.5">
-              <span className="text-sm font-medium text-zinc-700">Cantidad</span>
+              <span className="text-sm font-medium text-cantera-secondary">Cantidad</span>
               <input
                 name="cantidad"
                 type="number"
@@ -141,10 +141,10 @@ export default function ProducirForm({ productos }: { productos: Producto[] }) {
                 required
                 autoFocus
                 defaultValue={1}
-                className="rounded-lg border border-zinc-300 px-3 py-2.5 text-base focus:border-rose-500 focus:outline-none"
+                className="rounded-lg border border-cantera-sand px-3 py-2.5 text-base focus:border-cantera-primary focus:outline-none"
               />
             </label>
-            <button type="submit" className="rounded-lg bg-zinc-800 px-4 py-2.5 text-sm font-semibold text-white">
+            <button type="submit" className="rounded-lg bg-cantera-secondary px-4 py-2.5 text-sm font-semibold text-white">
               Agregar
             </button>
           </form>
@@ -158,7 +158,7 @@ export default function ProducirForm({ productos }: { productos: Producto[] }) {
           type="button"
           disabled={confirmando}
           onClick={confirmar}
-          className="rounded-lg bg-rose-800 px-4 py-3 text-base font-semibold text-white disabled:opacity-50"
+          className="rounded-lg bg-cantera-primary px-4 py-3 text-base font-semibold text-white disabled:opacity-50"
         >
           {confirmando ? 'Registrando...' : `Confirmar producción (${carrito.length})`}
         </button>

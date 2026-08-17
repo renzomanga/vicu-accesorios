@@ -1,6 +1,6 @@
-# Vicu Accesorios — App de Costos y Precios
+# Cantera Joyas — App de Costos y Precios
 
-App mobile-first (PWA) para gestionar insumos, recetas, stock y precios de venta de Vicu Accesorios.
+App mobile-first (PWA) para gestionar insumos, recetas, stock y precios de venta de Cantera Joyas.
 
 ## Stack
 

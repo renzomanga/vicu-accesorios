@@ -140,26 +140,26 @@ export default function OrdenNuevaForm({ insumosExistentes }: { insumosExistente
 
   if (!items) {
     return (
-      <div className="flex flex-col gap-4 rounded-xl border border-zinc-200 bg-white p-4">
+      <div className="flex flex-col gap-4 rounded-xl border border-cantera-sand bg-white p-4">
         <label className="flex flex-col gap-1.5">
-          <span className="text-sm font-medium text-zinc-700">Capturas de la orden</span>
+          <span className="text-sm font-medium text-cantera-secondary">Capturas de la orden</span>
           <input
             type="file"
             accept="image/*"
             multiple
             onChange={(e) => setArchivos(Array.from(e.target.files ?? []))}
-            className="rounded-lg border border-zinc-300 px-3 py-3 text-sm"
+            className="rounded-lg border border-cantera-sand px-3 py-3 text-sm"
           />
         </label>
         {archivos.length > 0 && (
-          <p className="text-sm text-zinc-500">{archivos.length} imagen(es) seleccionada(s)</p>
+          <p className="text-sm text-cantera-secondary">{archivos.length} imagen(es) seleccionada(s)</p>
         )}
         {error && <p className="text-sm text-red-600">{error}</p>}
         <button
           type="button"
           disabled={archivos.length === 0 || extrayendo}
           onClick={extraer}
-          className="rounded-lg bg-rose-800 px-4 py-3 text-base font-semibold text-white disabled:opacity-50"
+          className="rounded-lg bg-cantera-primary px-4 py-3 text-base font-semibold text-white disabled:opacity-50"
         >
           {extrayendo ? 'Leyendo la orden con IA...' : 'Extraer datos con IA'}
         </button>
@@ -173,7 +173,7 @@ export default function OrdenNuevaForm({ insumosExistentes }: { insumosExistente
         Revisá los datos antes de confirmar. Nada se guarda hasta que apretás &quot;Confirmar&quot;.
       </p>
 
-      <section className="grid grid-cols-2 gap-3 rounded-xl border border-zinc-200 bg-white p-4">
+      <section className="grid grid-cols-2 gap-3 rounded-xl border border-cantera-sand bg-white p-4">
         <CampoTexto label="Proveedor" value={proveedor} onChange={setProveedor} />
         <CampoTexto label="N° de orden" value={numeroOrden} onChange={setNumeroOrden} />
         <CampoTexto label="Fecha" value={fecha} onChange={setFecha} type="date" />
@@ -185,7 +185,7 @@ export default function OrdenNuevaForm({ insumosExistentes }: { insumosExistente
 
       <section className="flex flex-col gap-3">
         {items.map((item, idx) => (
-          <div key={idx} className="flex flex-col gap-3 rounded-xl border border-zinc-200 bg-white p-4">
+          <div key={idx} className="flex flex-col gap-3 rounded-xl border border-cantera-sand bg-white p-4">
             <CampoTexto label="Insumo" value={item.nombre} onChange={(v) => actualizarItem(idx, { nombre: v })} />
             <div className="grid grid-cols-2 gap-3">
               <CampoNumero
@@ -206,11 +206,11 @@ export default function OrdenNuevaForm({ insumosExistentes }: { insumosExistente
             />
 
             <label className="flex flex-col gap-1.5">
-              <span className="text-sm font-medium text-zinc-700">Matchea con</span>
+              <span className="text-sm font-medium text-cantera-secondary">Matchea con</span>
               <select
                 value={item.insumoId}
                 onChange={(e) => actualizarItem(idx, { insumoId: e.target.value })}
-                className="rounded-lg border border-zinc-300 px-3 py-2.5 text-base focus:border-rose-500 focus:outline-none"
+                className="rounded-lg border border-cantera-sand px-3 py-2.5 text-base focus:border-cantera-primary focus:outline-none"
               >
                 <option value="">+ Crear insumo nuevo</option>
                 {insumosExistentes.map((i) => (
@@ -222,7 +222,7 @@ export default function OrdenNuevaForm({ insumosExistentes }: { insumosExistente
             </label>
 
             {!item.insumoId && (
-              <div className="grid grid-cols-3 gap-3 rounded-lg bg-zinc-50 p-3">
+              <div className="grid grid-cols-3 gap-3 rounded-lg bg-cantera-base p-3">
                 <CampoTexto
                   label="Unidad de compra"
                   value={item.unidadCompra}
@@ -250,7 +250,7 @@ export default function OrdenNuevaForm({ insumosExistentes }: { insumosExistente
         type="button"
         disabled={confirmando}
         onClick={confirmar}
-        className="rounded-lg bg-rose-800 px-4 py-3 text-base font-semibold text-white disabled:opacity-50"
+        className="rounded-lg bg-cantera-primary px-4 py-3 text-base font-semibold text-white disabled:opacity-50"
       >
         {confirmando ? 'Guardando...' : 'Confirmar y guardar orden'}
       </button>
@@ -271,12 +271,12 @@ function CampoTexto({
 }) {
   return (
     <label className="flex flex-col gap-1.5">
-      <span className="text-sm font-medium text-zinc-700">{label}</span>
+      <span className="text-sm font-medium text-cantera-secondary">{label}</span>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="rounded-lg border border-zinc-300 px-3 py-2.5 text-base focus:border-rose-500 focus:outline-none"
+        className="rounded-lg border border-cantera-sand px-3 py-2.5 text-base focus:border-cantera-primary focus:outline-none"
       />
     </label>
   )
@@ -293,13 +293,13 @@ function CampoNumero({
 }) {
   return (
     <label className="flex flex-col gap-1.5">
-      <span className="text-sm font-medium text-zinc-700">{label}</span>
+      <span className="text-sm font-medium text-cantera-secondary">{label}</span>
       <input
         type="number"
         step="any"
         value={value}
         onChange={(e) => onChange(Number(e.target.value) || 0)}
-        className="rounded-lg border border-zinc-300 px-3 py-2.5 text-base focus:border-rose-500 focus:outline-none"
+        className="rounded-lg border border-cantera-sand px-3 py-2.5 text-base focus:border-cantera-primary focus:outline-none"
       />
     </label>
   )

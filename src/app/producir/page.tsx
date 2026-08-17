@@ -24,7 +24,7 @@ export default async function ProducirPage({
 
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-2xl font-bold text-zinc-900">Producir</h1>
+      <h1 className="font-caslon text-2xl text-cantera-ink">Producir</h1>
 
       {!configurado && <ConfiguracionPendiente />}
 
@@ -35,7 +35,7 @@ export default async function ProducirPage({
       )}
 
       {configurado && productos.length === 0 && (
-        <p className="text-zinc-500">Primero creá un producto con su receta.</p>
+        <p className="text-cantera-secondary">Primero creá un producto con su receta.</p>
       )}
 
       {configurado && productos.length > 0 && <ProducirForm productos={productos} />}

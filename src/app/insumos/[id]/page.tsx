@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { formatARS, formatCantidadUnidad } from '@/lib/format'
 import { actualizarInsumo, ajustarStock } from '../actions'
+import Campo from '@/components/Campo'
+import BotonGuardar from '@/components/BotonGuardar'
 
 export default async function InsumoDetallePage({
   params,
@@ -27,18 +29,18 @@ export default async function InsumoDetallePage({
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-zinc-900">{insumo.nombre}</h1>
-        <p className="text-sm text-zinc-500">
+        <h1 className="font-caslon text-2xl text-cantera-ink">{insumo.nombre}</h1>
+        <p className="text-sm text-cantera-secondary">
           Stock actual: {formatCantidadUnidad(insumo.stock_actual, insumo.unidad_uso)} · Costo:{' '}
           {formatARS(insumo.costo_unitario_ponderado)}/{insumo.unidad_uso}
         </p>
       </div>
 
-      <section className="rounded-xl border border-zinc-200 bg-white p-4">
-        <h2 className="mb-3 font-semibold text-zinc-800">Ajustar stock</h2>
+      <section className="rounded-xl border border-cantera-sand bg-white p-4">
+        <h2 className="mb-3 font-semibold text-cantera-ink">Ajustar stock</h2>
         <form action={ajustarConId} className="flex items-end gap-3">
           <label className="flex flex-1 flex-col gap-1.5">
-            <span className="text-sm font-medium text-zinc-700">
+            <span className="text-sm font-medium text-cantera-secondary">
               Cantidad ({insumo.unidad_uso}, negativo para descontar)
             </span>
             <input
@@ -46,17 +48,17 @@ export default async function InsumoDetallePage({
               type="number"
               step="any"
               required
-              className="rounded-lg border border-zinc-300 px-4 py-2.5 text-base focus:border-rose-500 focus:outline-none"
+              className="rounded-lg border border-cantera-sand px-4 py-2.5 text-base focus:border-cantera-primary focus:outline-none"
             />
           </label>
-          <button type="submit" className="rounded-lg bg-zinc-800 px-4 py-2.5 text-sm font-semibold text-white">
+          <button type="submit" className="rounded-lg bg-cantera-secondary px-4 py-2.5 text-sm font-semibold text-white">
             Aplicar
           </button>
         </form>
       </section>
 
-      <section className="rounded-xl border border-zinc-200 bg-white p-4">
-        <h2 className="mb-3 font-semibold text-zinc-800">Editar insumo</h2>
+      <section className="rounded-xl border border-cantera-sand bg-white p-4">
+        <h2 className="mb-3 font-semibold text-cantera-ink">Editar insumo</h2>
         <form action={actualizarConId} className="flex flex-col gap-4">
           <Campo label="Nombre" name="nombre" defaultValue={insumo.nombre} required />
           <Campo label="SKU / código" name="sku" defaultValue={insumo.sku ?? ''} />
@@ -85,18 +87,16 @@ export default async function InsumoDetallePage({
             step="any"
             defaultValue={insumo.costo_unitario_ponderado}
           />
-          <button type="submit" className="rounded-lg bg-rose-800 px-4 py-3 text-base font-semibold text-white">
-            Guardar cambios
-          </button>
+          <BotonGuardar label="Guardar cambios" />
         </form>
       </section>
 
       {movimientos && movimientos.length > 0 && (
-        <section className="rounded-xl border border-zinc-200 bg-white p-4">
-          <h2 className="mb-3 font-semibold text-zinc-800">Movimientos recientes</h2>
+        <section className="rounded-xl border border-cantera-sand bg-white p-4">
+          <h2 className="mb-3 font-semibold text-cantera-ink">Movimientos recientes</h2>
           <ul className="flex flex-col gap-2 text-sm">
             {movimientos.map((m) => (
-              <li key={m.id} className="flex justify-between text-zinc-600">
+              <li key={m.id} className="flex justify-between text-cantera-secondary">
                 <span>
                   {m.tipo === 'compra' ? 'Compra' : m.tipo === 'consumo_produccion' ? 'Producción' : 'Ajuste manual'}
                 </span>
@@ -110,22 +110,5 @@ export default async function InsumoDetallePage({
         </section>
       )}
     </div>
-  )
-}
-
-function Campo({
-  label,
-  name,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & { label: string }) {
-  return (
-    <label className="flex flex-col gap-1.5">
-      <span className="text-sm font-medium text-zinc-700">{label}</span>
-      <input
-        name={name}
-        className="rounded-lg border border-zinc-300 px-4 py-3 text-base focus:border-rose-500 focus:outline-none"
-        {...props}
-      />
-    </label>
   )
 }

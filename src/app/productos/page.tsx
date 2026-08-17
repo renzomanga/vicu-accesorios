@@ -23,10 +23,10 @@ export default async function ProductosPage() {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-zinc-900">Productos</h1>
+        <h1 className="font-caslon text-2xl text-cantera-ink">Productos</h1>
         <Link
           href="/productos/nuevo"
-          className="flex items-center gap-1.5 rounded-lg bg-rose-800 px-4 py-2.5 text-sm font-semibold text-white"
+          className="flex items-center gap-1.5 rounded-lg bg-cantera-primary px-4 py-2.5 text-sm font-semibold text-white"
         >
           <Plus size={18} /> Nuevo
         </Link>
@@ -35,7 +35,7 @@ export default async function ProductosPage() {
       {!configurado && <ConfiguracionPendiente />}
 
       {configurado && productos.length === 0 && (
-        <p className="text-zinc-500">Todavía no cargaste ningún producto.</p>
+        <p className="text-cantera-secondary">Todavía no cargaste ningún producto.</p>
       )}
 
       <div className="flex flex-col gap-2">
@@ -43,10 +43,10 @@ export default async function ProductosPage() {
           <Link
             key={p.id}
             href={`/productos/${p.id}`}
-            className="flex items-center justify-between rounded-xl border border-zinc-200 bg-white p-4 shadow-sm"
+            className="flex items-center justify-between rounded-xl border border-cantera-sand bg-white p-4 shadow-sm"
           >
-            <p className="font-semibold text-zinc-800">{p.nombre}</p>
-            <p className="text-base font-bold text-rose-800">
+            <p className="font-semibold text-cantera-ink">{p.nombre}</p>
+            <p className="text-base font-bold text-cantera-primary">
               {formatARS(p.precio_final ?? p.precio_sugerido)}
             </p>
           </Link>

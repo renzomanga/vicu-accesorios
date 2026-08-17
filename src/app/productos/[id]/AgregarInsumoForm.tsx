@@ -32,19 +32,19 @@ export default function AgregarInsumoForm({
     return (
       <div className="flex flex-col gap-3">
         <label className="relative flex items-center">
-          <Search size={18} className="pointer-events-none absolute left-3 text-zinc-400" />
+          <Search size={18} className="pointer-events-none absolute left-3 text-cantera-neutral" />
           <input
             type="search"
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
             placeholder="Buscar insumo para agregar..."
-            className="w-full rounded-lg border border-zinc-300 py-3 pl-10 pr-4 text-base focus:border-rose-500 focus:outline-none"
+            className="w-full rounded-lg border border-cantera-sand py-3 pl-10 pr-4 text-base focus:border-cantera-primary focus:outline-none"
           />
         </label>
 
         {busqueda.trim() !== '' && (
-          <div className="flex max-h-64 flex-col gap-1 overflow-y-auto rounded-lg border border-zinc-200">
-            {filtrados.length === 0 && <p className="p-3 text-sm text-zinc-500">No encontramos insumos.</p>}
+          <div className="flex max-h-64 flex-col gap-1 overflow-y-auto rounded-lg border border-cantera-sand">
+            {filtrados.length === 0 && <p className="p-3 text-sm text-cantera-secondary">No encontramos insumos.</p>}
             {filtrados.map((i) => (
               <button
                 key={i.id}
@@ -53,9 +53,9 @@ export default function AgregarInsumoForm({
                   setSeleccionado(i)
                   setBusqueda('')
                 }}
-                className="px-3 py-2.5 text-left text-sm hover:bg-rose-50"
+                className="px-3 py-2.5 text-left text-sm hover:bg-cantera-primary/5"
               >
-                {i.nombre} <span className="text-zinc-400">({i.unidad_uso})</span>
+                {i.nombre} <span className="text-cantera-neutral">({i.unidad_uso})</span>
               </button>
             ))}
           </div>
@@ -70,33 +70,38 @@ export default function AgregarInsumoForm({
         await action(formData)
         setSeleccionado(null)
       }}
-      className="flex items-end gap-3"
+      className="flex flex-col gap-3 sm:flex-row sm:items-end"
     >
       <input type="hidden" name="insumo_id" value={seleccionado.id} />
-      <div className="flex flex-1 items-center justify-between gap-2 rounded-lg bg-rose-50 px-3 py-2.5">
-        <span className="text-sm font-semibold text-rose-900">{seleccionado.nombre}</span>
+      <div className="flex min-w-0 items-center justify-between gap-2 rounded-lg bg-cantera-primary/10 px-3 py-2.5 sm:flex-1">
+        <span className="min-w-0 truncate text-sm font-semibold text-cantera-primary">{seleccionado.nombre}</span>
         <button
           type="button"
           onClick={() => setSeleccionado(null)}
-          className="flex shrink-0 items-center gap-1 text-xs text-rose-800 underline"
+          className="flex shrink-0 items-center gap-1 text-xs text-cantera-primary underline"
         >
           <X size={14} /> Cambiar
         </button>
       </div>
-      <label className="flex w-28 flex-col gap-1.5">
-        <span className="text-sm font-medium text-zinc-700">Cantidad ({seleccionado.unidad_uso})</span>
-        <input
-          name="cantidad_usada"
-          type="number"
-          step="any"
-          required
-          autoFocus
-          className="rounded-lg border border-zinc-300 px-3 py-2.5 text-base focus:border-rose-500 focus:outline-none"
-        />
-      </label>
-      <button type="submit" className="rounded-lg bg-zinc-800 px-4 py-2.5 text-sm font-semibold text-white">
-        Agregar
-      </button>
+      <div className="flex items-end gap-3">
+        <label className="flex flex-1 flex-col gap-1.5 sm:w-28 sm:flex-none">
+          <span className="text-sm font-medium text-cantera-secondary">Cantidad ({seleccionado.unidad_uso})</span>
+          <input
+            name="cantidad_usada"
+            type="number"
+            step="any"
+            required
+            autoFocus
+            className="w-full rounded-lg border border-cantera-sand px-3 py-2.5 text-base focus:border-cantera-primary focus:outline-none"
+          />
+        </label>
+        <button
+          type="submit"
+          className="shrink-0 rounded-lg bg-cantera-secondary px-4 py-2.5 text-sm font-semibold text-white"
+        >
+          Agregar
+        </button>
+      </div>
     </form>
   )
 }

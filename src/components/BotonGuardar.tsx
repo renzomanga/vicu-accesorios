@@ -30,7 +30,7 @@ export default function BotonGuardar({
       <button
         type="submit"
         disabled={pending}
-        className="rounded-lg bg-rose-800 px-4 py-3 text-base font-semibold text-white disabled:opacity-60"
+        className="rounded-lg bg-cantera-primary px-4 py-3 text-base font-semibold text-white disabled:opacity-60"
       >
         {pending ? labelPendiente : label}
       </button>

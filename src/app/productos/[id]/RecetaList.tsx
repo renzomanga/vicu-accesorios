@@ -20,14 +20,14 @@ export default function RecetaList({ receta, productoId }: { receta: RecetaItem[
 
         if (editando) {
           return (
-            <li key={r.id} className="flex items-center gap-3 text-sm">
-              <span className="flex-1">{r.insumos?.nombre}</span>
+            <li key={r.id} className="flex flex-col gap-2 text-sm">
+              <span className="font-medium text-cantera-ink">{r.insumos?.nombre}</span>
               <form
                 action={async (formData) => {
                   await actualizarCantidadReceta(r.id, productoId, formData)
                   setEditandoId(null)
                 }}
-                className="flex items-center gap-2"
+                className="flex flex-wrap items-center gap-2"
               >
                 <input
                   name="cantidad_usada"
@@ -36,30 +36,30 @@ export default function RecetaList({ receta, productoId }: { receta: RecetaItem[
                   required
                   defaultValue={r.cantidad_usada}
                   autoFocus
-                  className="w-24 rounded-lg border border-zinc-300 px-2 py-1.5 text-sm focus:border-rose-500 focus:outline-none"
+                  className="w-24 rounded-lg border border-cantera-sand px-2 py-1.5 text-sm focus:border-cantera-primary focus:outline-none"
                 />
-                <span className="text-zinc-500">{r.insumos?.unidad_uso}</span>
+                <span className="text-cantera-secondary">{r.insumos?.unidad_uso}</span>
                 <button type="submit" className="text-emerald-700 underline">
                   Guardar
                 </button>
+                <button type="button" onClick={() => setEditandoId(null)} className="text-cantera-secondary underline">
+                  Cancelar
+                </button>
               </form>
-              <button type="button" onClick={() => setEditandoId(null)} className="text-zinc-500 underline">
-                Cancelar
-              </button>
             </li>
           )
         }
 
         return (
-          <li key={r.id} className="flex items-center justify-between text-sm">
-            <span>
+          <li key={r.id} className="flex items-start justify-between gap-3 text-sm">
+            <span className="min-w-0 flex-1">
               {r.insumos?.nombre} — {formatCantidadUnidad(r.cantidad_usada, r.insumos?.unidad_uso ?? '')}
             </span>
-            <div className="flex items-center gap-3">
-              <span className="text-zinc-500">
+            <div className="flex shrink-0 items-center gap-3">
+              <span className="text-cantera-secondary">
                 {formatARS(r.cantidad_usada * (r.insumos?.costo_unitario_ponderado ?? 0))}
               </span>
-              <button type="button" onClick={() => setEditandoId(r.id)} className="text-zinc-600 underline">
+              <button type="button" onClick={() => setEditandoId(r.id)} className="text-cantera-secondary underline">
                 Editar
               </button>
               <form action={quitarInsumoReceta.bind(null, r.id, productoId)}>

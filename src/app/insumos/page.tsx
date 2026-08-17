@@ -19,10 +19,10 @@ export default async function InsumosPage() {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-zinc-900">Insumos</h1>
+        <h1 className="font-caslon text-2xl text-cantera-ink">Insumos</h1>
         <Link
           href="/insumos/nuevo"
-          className="flex items-center gap-1.5 rounded-lg bg-rose-800 px-4 py-2.5 text-sm font-semibold text-white"
+          className="flex items-center gap-1.5 rounded-lg bg-cantera-primary px-4 py-2.5 text-sm font-semibold text-white"
         >
           <Plus size={18} /> Nuevo
         </Link>
@@ -31,7 +31,7 @@ export default async function InsumosPage() {
       {!configurado && <ConfiguracionPendiente />}
 
       {configurado && insumos.length === 0 && (
-        <p className="text-zinc-500">Todavía no cargaste ningún insumo.</p>
+        <p className="text-cantera-secondary">Todavía no cargaste ningún insumo.</p>
       )}
 
       {configurado && insumos.length > 0 && <InsumosList insumos={insumos} />}

@@ -1,9 +1,11 @@
 import { crearInsumo } from '../actions'
+import Campo from '@/components/Campo'
+import BotonGuardar from '@/components/BotonGuardar'
 
 export default function NuevoInsumoPage() {
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-2xl font-bold text-zinc-900">Nuevo insumo</h1>
+      <h1 className="font-caslon text-2xl text-cantera-ink">Nuevo insumo</h1>
 
       <form action={crearInsumo} className="flex flex-col gap-4">
         <Campo label="Nombre" name="nombre" required placeholder="Ej: Cadena fina dorada" />
@@ -36,32 +38,10 @@ export default function NuevoInsumoPage() {
           defaultValue="0"
         />
 
-        <button
-          type="submit"
-          className="mt-2 rounded-lg bg-rose-800 px-4 py-3 text-base font-semibold text-white"
-        >
-          Guardar insumo
-        </button>
+        <div className="mt-2">
+          <BotonGuardar label="Guardar insumo" />
+        </div>
       </form>
     </div>
-  )
-}
-
-function Campo({
-  label,
-  name,
-  hint,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & { label: string; hint?: string }) {
-  return (
-    <label className="flex flex-col gap-1.5">
-      <span className="text-sm font-medium text-zinc-700">{label}</span>
-      <input
-        name={name}
-        className="rounded-lg border border-zinc-300 px-4 py-3 text-base focus:border-rose-500 focus:outline-none"
-        {...props}
-      />
-      {hint && <span className="text-xs text-zinc-500">{hint}</span>}
-    </label>
   )
 }

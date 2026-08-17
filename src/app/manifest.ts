@@ -2,13 +2,13 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Vicu Accesorios — Costos y Precios',
-    short_name: 'Vicu Accesorios',
-    description: 'Insumos, recetas, stock y precios de Vicu Accesorios',
+    name: 'Cantera Joyas — Costos y Precios',
+    short_name: 'Cantera Joyas',
+    description: 'Insumos, recetas, stock y precios de Cantera Joyas',
     start_url: '/',
     display: 'standalone',
-    background_color: '#faf7f5',
-    theme_color: '#9d174d',
+    background_color: '#F8F5EE',
+    theme_color: '#7A6152',
     lang: 'es-AR',
     icons: [{ src: '/icon.svg', sizes: 'any', type: 'image/svg+xml' }],
   }

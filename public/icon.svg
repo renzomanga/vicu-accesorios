@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
-  <rect width="192" height="192" rx="40" fill="#9d174d"/>
-  <text x="96" y="122" font-family="Arial, sans-serif" font-size="88" font-weight="700" fill="#fdf2f8" text-anchor="middle">VA</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><rect width="512" height="512" fill="#7A6152"></rect><g transform="translate(126 126) scale(2.6)"><polygon points="50,7 85,27 93,63 64,93 25,87 7,45" fill="#F8F5EE"></polygon></g></svg>

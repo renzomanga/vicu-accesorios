@@ -30,10 +30,10 @@ export default async function OrdenesPage() {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-zinc-900">Órdenes de compra</h1>
+        <h1 className="font-caslon text-2xl text-cantera-ink">Órdenes de compra</h1>
         <Link
           href="/ordenes/nueva"
-          className="flex items-center gap-1.5 rounded-lg bg-rose-800 px-4 py-2.5 text-sm font-semibold text-white"
+          className="flex items-center gap-1.5 rounded-lg bg-cantera-primary px-4 py-2.5 text-sm font-semibold text-white"
         >
           <Plus size={18} /> Subir captura
         </Link>
@@ -42,19 +42,19 @@ export default async function OrdenesPage() {
       {!configurado && <ConfiguracionPendiente />}
 
       {configurado && ordenes.length === 0 && (
-        <p className="text-zinc-500">Todavía no cargaste ninguna orden.</p>
+        <p className="text-cantera-secondary">Todavía no cargaste ninguna orden.</p>
       )}
 
       <div className="flex flex-col gap-2">
         {ordenes.map((o) => (
-          <div key={o.id} className="flex items-center justify-between rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+          <div key={o.id} className="flex items-center justify-between rounded-xl border border-cantera-sand bg-white p-4 shadow-sm">
             <div>
-              <p className="font-semibold text-zinc-800">
+              <p className="font-semibold text-cantera-ink">
                 {o.proveedores?.nombre ?? 'Proveedor'} {o.numero_orden ? `— #${o.numero_orden}` : ''}
               </p>
-              <p className="text-sm text-zinc-500">{o.fecha ?? 'Sin fecha'}</p>
+              <p className="text-sm text-cantera-secondary">{o.fecha ?? 'Sin fecha'}</p>
             </div>
-            <p className="text-base font-bold text-rose-800">{formatARS(o.total)}</p>
+            <p className="text-base font-bold text-cantera-primary">{formatARS(o.total)}</p>
           </div>
         ))}
       </div>

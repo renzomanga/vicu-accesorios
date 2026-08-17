@@ -1,4 +1,4 @@
--- Vicu Accesorios — esquema de base de datos
+-- Cantera Joyas — esquema de base de datos
 -- Correr en el SQL Editor de Supabase (proyecto nuevo)
 
 create extension if not exists "pgcrypto";

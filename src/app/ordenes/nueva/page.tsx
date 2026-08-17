@@ -9,7 +9,7 @@ export default async function NuevaOrdenPage() {
   if (!configurado) {
     return (
       <div className="flex flex-col gap-5">
-        <h1 className="text-2xl font-bold text-zinc-900">Nueva orden de compra</h1>
+        <h1 className="font-caslon text-2xl text-cantera-ink">Nueva orden de compra</h1>
         <ConfiguracionPendiente />
       </div>
     )
@@ -20,7 +20,7 @@ export default async function NuevaOrdenPage() {
 
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-2xl font-bold text-zinc-900">Nueva orden de compra</h1>
+      <h1 className="font-caslon text-2xl text-cantera-ink">Nueva orden de compra</h1>
       <OrdenNuevaForm insumosExistentes={insumos ?? []} />
     </div>
   )

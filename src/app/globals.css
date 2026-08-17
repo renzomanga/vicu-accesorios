@@ -1,26 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Cantera Joyas — paleta Basalto */
+  --color-cantera-primary: #7a6152; /* Barro Seco */
+  --color-cantera-secondary: #4a4a46; /* Gris Basalto */
+  --color-cantera-accent: #55636b; /* Azul Ceniza */
+  --color-cantera-neutral: #b3ada2; /* Gris Claro */
+  --color-cantera-sand: #d8d1c1; /* Arena Cruda */
+  --color-cantera-base: #f8f5ee; /* Hueso */
+  --color-cantera-ink: #221f1c; /* Tinta */
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-cantera-primary: var(--color-cantera-primary);
+  --color-cantera-secondary: var(--color-cantera-secondary);
+  --color-cantera-accent: var(--color-cantera-accent);
+  --color-cantera-neutral: var(--color-cantera-neutral);
+  --color-cantera-sand: var(--color-cantera-sand);
+  --color-cantera-base: var(--color-cantera-base);
+  --color-cantera-ink: var(--color-cantera-ink);
+  --font-sans: var(--font-karla);
+  --font-caslon: var(--font-caslon);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cantera-base);
+  color: var(--color-cantera-ink);
+  font-family: var(--font-karla), Arial, Helvetica, sans-serif;
+}
+
+.font-caslon {
+  font-family: var(--font-caslon), Caslon, Georgia, serif;
+}
+
+.caption {
+  font-family: var(--font-karla), sans-serif;
+  font-weight: 500;
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }

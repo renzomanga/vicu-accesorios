@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { formatARS, formatNumero } from '@/lib/format'
 import BotonGuardar from '@/components/BotonGuardar'
+import Campo from '@/components/Campo'
 
 type Props = {
   productoId: string
@@ -45,29 +46,29 @@ export default function CostosForm({
 
   return (
     <form action={action} className="flex flex-col gap-4">
-      <div className="flex flex-col gap-1 rounded-lg bg-zinc-50 p-4">
+      <div className="flex flex-col gap-1 rounded-lg bg-cantera-base p-4">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-zinc-500">Costo total (materiales + mano de obra + otros)</span>
-          <span className="font-semibold text-zinc-800">{formatARS(costoTotal)}</span>
+          <span className="text-cantera-secondary">Costo total (materiales + mano de obra + otros)</span>
+          <span className="font-semibold text-cantera-ink">{formatARS(costoTotal)}</span>
         </div>
         <div className="flex items-center justify-between text-sm">
-          <span className="text-zinc-500">Precio sugerido (según margen)</span>
-          <span className="font-semibold text-zinc-800">{formatARS(precioSugerido)}</span>
+          <span className="text-cantera-secondary">Precio sugerido (según margen)</span>
+          <span className="font-semibold text-cantera-ink">{formatARS(precioSugerido)}</span>
         </div>
         <div className="flex items-center justify-between text-sm">
-          <span className="text-zinc-500">Ganancia con precio sugerido</span>
+          <span className="text-cantera-secondary">Ganancia con precio sugerido</span>
           <span className="font-semibold text-emerald-700">{formatARS(gananciaSugerida)}</span>
         </div>
         {tienePrecioFinal && (
           <>
-            <div className="my-1 border-t border-zinc-200" />
+            <div className="my-1 border-t border-cantera-sand" />
             <div className="flex items-center justify-between text-sm">
-              <span className="text-zinc-500">Ganancia con precio final</span>
+              <span className="text-cantera-secondary">Ganancia con precio final</span>
               <span className="font-semibold text-emerald-700">{formatARS(gananciaFinal)}</span>
             </div>
             <div className="flex items-center justify-between text-sm">
-              <span className="text-zinc-500">Margen real con precio final</span>
-              <span className="font-semibold text-zinc-800">{formatNumero(margenFinalPct, 1)}%</span>
+              <span className="text-cantera-secondary">Margen real con precio final</span>
+              <span className="font-semibold text-cantera-ink">{formatNumero(margenFinalPct, 1)}%</span>
             </div>
           </>
         )}
@@ -111,24 +112,5 @@ export default function CostosForm({
       />
       <BotonGuardar />
     </form>
-  )
-}
-
-function Campo({
-  label,
-  name,
-  hint,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & { label: string; hint?: string }) {
-  return (
-    <label className="flex flex-col gap-1.5">
-      <span className="text-sm font-medium text-zinc-700">{label}</span>
-      <input
-        name={name}
-        className="rounded-lg border border-zinc-300 px-4 py-3 text-base focus:border-rose-500 focus:outline-none"
-        {...props}
-      />
-      {hint && <span className="text-xs text-zinc-500">{hint}</span>}
-    </label>
   )
 }

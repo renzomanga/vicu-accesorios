@@ -1,11 +1,12 @@
 import { crearProducto } from '../actions'
 import BotonGuardar from '@/components/BotonGuardar'
+import Campo from '@/components/Campo'
 
 export default function NuevoProductoPage() {
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-2xl font-bold text-zinc-900">Nuevo producto</h1>
-      <p className="text-sm text-zinc-500">
+      <h1 className="font-caslon text-2xl text-cantera-ink">Nuevo producto</h1>
+      <p className="text-sm text-cantera-secondary">
         Después de guardar vas a poder agregar los insumos de la receta.
       </p>
 
@@ -38,22 +39,5 @@ export default function NuevoProductoPage() {
         </div>
       </form>
     </div>
-  )
-}
-
-function Campo({
-  label,
-  name,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & { label: string }) {
-  return (
-    <label className="flex flex-col gap-1.5">
-      <span className="text-sm font-medium text-zinc-700">{label}</span>
-      <input
-        name={name}
-        className="rounded-lg border border-zinc-300 px-4 py-3 text-base focus:border-rose-500 focus:outline-none"
-        {...props}
-      />
-    </label>
   )
 }

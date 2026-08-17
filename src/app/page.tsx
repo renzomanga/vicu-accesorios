@@ -28,7 +28,7 @@ export default async function Dashboard() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-2xl font-bold text-zinc-900">Hola, Vicu 👋</h1>
+      <h1 className="font-caslon text-2xl text-cantera-ink">Hola, Vicu 👋</h1>
 
       {!configurado && <ConfiguracionPendiente />}
 
@@ -41,12 +41,12 @@ export default async function Dashboard() {
             <Link
               key={a.href}
               href={a.href}
-              className="flex items-center gap-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition-colors hover:border-rose-300 hover:bg-rose-50"
+              className="flex items-center gap-4 rounded-2xl border border-cantera-sand bg-white p-5 shadow-sm transition-colors hover:border-cantera-primary/40 hover:bg-cantera-primary/5"
             >
-              <span className="rounded-xl bg-rose-100 p-3 text-rose-800">
+              <span className="rounded-xl bg-cantera-primary/10 p-3 text-cantera-primary">
                 <Icon size={24} />
               </span>
-              <span className="text-base font-semibold text-zinc-800">{a.label}</span>
+              <span className="text-base font-semibold text-cantera-ink">{a.label}</span>
             </Link>
           )
         })}
